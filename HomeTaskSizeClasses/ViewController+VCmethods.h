@@ -10,5 +10,5 @@
 
 @interface UIViewController (VCmethods)
 - (void)resizeConstraints;
-- (BOOL)shouldResizeWidthOfHeightConstraint;
+//- (BOOL)shouldResizeWidthOfHeightConstraint;
 @end
