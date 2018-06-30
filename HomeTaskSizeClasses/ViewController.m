@@ -19,7 +19,7 @@
     // Do any additional setup after loading the view, typically from a nib.
     [self setConstant:self.view.frame.size.height * 0.4];
     _horizontalSizeClass = [self traitCollection].horizontalSizeClass;
-    
+    self.counter = 0;
     //orientations && sizeClasses for checking
     NSArray *orientations = @[[NSNumber numberWithInteger:UIInterfaceOrientationPortrait], [NSNumber numberWithInteger:UIDeviceOrientationPortraitUpsideDown], [NSNumber numberWithInteger:UIDeviceOrientationLandscapeRight], [NSNumber numberWithInteger:UIDeviceOrientationLandscapeLeft], [NSNumber numberWithInteger:UIDeviceOrientationFaceUp], [NSNumber numberWithInteger:UIDeviceOrientationFaceDown]];
     [self setOrientations:orientations];
@@ -28,27 +28,35 @@
     [self setSizeClasses:sizeClasses];
     
     //change orientaton observing
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationDidChange:) name:UIDeviceOrientationDidChangeNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationDidChange:) name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
 //every time orientation changed - set width && height to the initial equal state;
-- (void)orientationDidChange:(NSNotification *)notification {
-    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;//    NSLog(@"Orientation changed");
-    for (NSInteger i = 0; i < self.orientations.count; i++) {
-        if(orientation == i) {
-            self.equalHeightConstr.constant = 0;
-            self.equalWidthConstr.constant = 0;
-        }
-    }
+//- (void)orientationDidChange:(NSNotification *)notification {
+//    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;//    NSLog(@"Orientation changed");
+//    for (NSInteger i = 0; i < self.orientations.count; i++) {
+//        if(orientation == i) {
+//            self.equalHeightConstr.constant = 0;
+//            self.equalWidthConstr.constant = 0;
+//        }
+//    }
+//}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        [self.equalHeightConstr setConstant:0];
+        [self.equalWidthConstr setConstant:0];
+    } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {}];
 }
 
 
-
 - (IBAction)firstBttnTapped:(id)sender {
+    self.counter = 0;
     [self resizeConstraints];
 }
 
 - (IBAction)secondBttnTapped:(id)sender {
+    self.counter = 1;
     [self resizeConstraints];
 }
 

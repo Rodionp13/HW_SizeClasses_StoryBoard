@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *equalWidthConstr;
 
 @property (assign, nonatomic) CGFloat constant;
+@property (assign, nonatomic) int counter;
 @property (assign, nonatomic) NSInteger horizontalSizeClass;
 @property (nonatomic) NSArray *orientations;
 @property (nonatomic) NSArray *sizeClasses;
